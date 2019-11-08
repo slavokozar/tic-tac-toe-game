@@ -43,6 +43,10 @@ export default class App extends React.Component {
                                                      console.log( 'clicked', i, j );
 
                                                      let grid = this.state.grid;
+
+                                                     // if(grid[ i ][ j ]) return;
+                                                     if(grid[ i ][ j ] !== null) return;
+
                                                      grid[ i ][ j ] = this.state.player === 1 ? 'X' : 'O';
 
                                                      // if(this.state.player === 1){
