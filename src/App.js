@@ -15,22 +15,37 @@ export default class App extends React.Component {
         }
     }
 
+    handleClick() {
+        console.log( 'click' );
+
+    }
+
     render() {
         return (
             <div style={{width: '100vw', height: '100vh', display: 'flex', background: '#aaa'}}>
                 <div style={{width: '60vw', height: '40vw', margin: 'auto'}}>
                     {
-                        this.state.grid.map( ( row ) => (
+                        this.state.grid.map( ( row, i ) => (
                             <div style={{display: 'flex', flexDirection: 'row'}}>
                                 {
-                                    row.map( ( symbol ) => (
+                                    row.map( ( symbol, j ) => (
                                         <div style={{
                                             width:      '10vw',
                                             height:     '10vw',
                                             fontSize:   '3rem',
                                             margin:     '3px',
                                             background: '#fff'
-                                        }}>{ symbol }</div>
+                                        }}
+                                             onClick={() => {
+                                                 console.log('clicked', i, j);
+
+                                                 let grid = this.state.grid;
+                                                 grid[i][j] = 'X';
+                                                 this.setState({grid: grid});
+
+                                             }}
+
+                                        >{symbol}</div>
                                     ) )
                                 }
                             </div>
