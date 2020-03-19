@@ -26,23 +26,41 @@ export default class App extends React.Component {
 
                                 <div key={i} style={{display: 'flex', flexDirection: 'row'}}>
                                     {
-
                                         row.map( ( cell, j ) => (
-                                            <div key={j} style={{
-                                                width:      '10vw',
-                                                height:     '10vw',
-                                                fontSize:   '3rem',
-                                                margin:     '3px',
-                                                background: '#fff'
-                                            }}
+
+                                            <div key={j}
+                                                 style={{
+                                                     width:      '10vw',
+                                                     height:     '10vw',
+                                                     fontSize:   '3rem',
+                                                     margin:     '3px',
+                                                     background: '#fff'
+                                                 }}
+
+                                                //onClick={this.handleClick}
+
                                                  onClick={() => {
-                                                     console.log( 'clicked', i, j );
+                                                     let newGrid = this.state.grid;
+                                                     let newPlayer = this.state.player;
+
+                                                     if ( this.state.player === 1 ) {
+                                                         newGrid[ i ][ j ] = 'x';
+                                                         newPlayer = 2;
+                                                     } else {
+                                                         newGrid[ i ][ j ] = 'o';
+                                                         newPlayer = 1;
+                                                     }
+
+                                                     this.setState( {
+                                                         grid: newGrid,
+                                                         player: newPlayer
+                                                     } );
                                                  }}
                                             >
                                                 {cell}
                                             </div>
-                                        ) )
 
+                                        ) )
                                     }
                                 </div>
                             ) )
