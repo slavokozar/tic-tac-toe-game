@@ -7,7 +7,7 @@ export default class App extends React.Component {
 
         this.state = {
             grid:   [
-                ['', '', '', ''],
+                ['x', '', '', ''],
                 ['', '', '', ''],
                 ['', '', '', ''],
                 ['', '', '', ''],
@@ -37,8 +37,6 @@ export default class App extends React.Component {
                                                      background: '#fff'
                                                  }}
 
-                                                //onClick={this.handleClick}
-
                                                  onClick={() => {
 
                                                      // because of arrow function we can use the variables i and j
@@ -47,6 +45,7 @@ export default class App extends React.Component {
 
                                                      // create a copy of state variables we can modify
                                                      // remember we can't modify state directly!
+
                                                      let newGrid = this.state.grid;
                                                      let newPlayer = this.state.player;
 
