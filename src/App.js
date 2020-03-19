@@ -23,19 +23,26 @@ export default class App extends React.Component {
                     <div style={{width: '60vw', height: '40vw', margin: 'auto'}}>
                         {
                             this.state.grid.map( ( row, i ) => (
-                                <div style={{display: 'flex', flexDirection: 'row'}}>
+
+                                <div key={i} style={{display: 'flex', flexDirection: 'row'}}>
                                     {
-                                        row.map( ( symbol, j ) => (
-                                            <div style={{
+
+                                        row.map( ( cell, j ) => (
+                                            <div key={j} style={{
                                                 width:      '10vw',
                                                 height:     '10vw',
                                                 fontSize:   '3rem',
                                                 margin:     '3px',
                                                 background: '#fff'
-                                            }}>
-                                                {symbol}
+                                            }}
+                                                 onClick={() => {
+                                                     console.log( 'clicked', i, j );
+                                                 }}
+                                            >
+                                                {cell}
                                             </div>
                                         ) )
+
                                     }
                                 </div>
                             ) )
