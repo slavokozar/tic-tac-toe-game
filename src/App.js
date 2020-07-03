@@ -19,33 +19,50 @@ export default class App extends React.Component {
     evaluateGame = () => {
         console.log( 'evaluating' );
 
-        let x = 0;
-        let y = 0;
+        for(let y = 0; y < this.state.grid; y++){
+            for(let x = 0; x < this.state.grid[0]; x++){
 
-        let i = 1;
-        while ( x + i < this.state.grid[ 0 ].length && this.state.grid[ y ][ x ] === this.state.grid[ y ][ x + i ] ) {
-            i++;
+                let i = 1;
+                while ( x + i < this.state.grid[ 0 ].length && this.state.grid[ y ][ x ] === this.state.grid[ y ][ x + i ] ) {
+                    i++;
+                }
+
+                console.log( i );
+                if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
+
+                i = 1;
+                while ( y + i < this.state.grid.length && this.state.grid[ y ][ x ] === this.state.grid[ y + i ][ x ] ) {
+                    i++;
+                }
+
+                console.log( i );
+                if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
+
+                i = 1;
+                while ( y + i < this.state.grid.length && x + i < this.state.grid[ 0 ].length
+                && this.state.grid[ y ][ x ] === this.state.grid[ y + i ][ x + i ] ) {
+                    i++;
+                }
+
+                console.log( i );
+                if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
+
+
+                i = 1;
+                while ( y - i > 0 && x + i < this.state.grid[ 0 ].length
+                && this.state.grid[ y ][ x ] === this.state.grid[ y - i ][ x + i ] ) {
+                    i++;
+                }
+
+                console.log( i );
+                if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
+
+
+            }
         }
 
-        console.log( i );
-        if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
 
-        i = 1;
-        while ( y + i < this.state.grid.length && this.state.grid[ y ][ x ] === this.state.grid[ y + i ][ x ] ) {
-            i++;
-        }
 
-        console.log( i );
-        if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
-
-        i = 1;
-        while ( y + i < this.state.grid.length && x + i < this.state.grid[ 0 ].length
-        && this.state.grid[ y ][ x ] === this.state.grid[ y + i ][ x + i ] ) {
-            i++;
-        }
-
-        console.log( i );
-        if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
     };
 
     render() {
