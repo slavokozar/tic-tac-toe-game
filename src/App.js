@@ -7,7 +7,7 @@ export default class App extends React.Component {
 
         this.state = {
             grid:   [
-                ['x', '', '', ''],
+                ['', '', '', ''],
                 ['', '', '', ''],
                 ['', '', '', ''],
                 ['', '', '', ''],
@@ -16,67 +16,92 @@ export default class App extends React.Component {
         }
     }
 
+    evaluateGame = () => {
+        console.log( 'evaluating' );
+
+        let x = 0;
+        let y = 0;
+
+        let i = 1;
+        while ( x + i < this.state.grid[ 0 ].length && this.state.grid[ y ][ x ] === this.state.grid[ y ][ x + i ] ) {
+            i++;
+        }
+
+        console.log( i );
+        if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
+
+        i = 1;
+        while ( y + i < this.state.grid.length && this.state.grid[ y ][ x ] === this.state.grid[ y + i ][ x ] ) {
+            i++;
+        }
+
+        console.log( i );
+        if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
+
+        i = 1;
+        while ( y + i < this.state.grid.length && x + i < this.state.grid[ 0 ].length
+        && this.state.grid[ y ][ x ] === this.state.grid[ y + i ][ x + i ] ) {
+            i++;
+        }
+
+        console.log( i );
+        if(i >= 3) alert(this.state.grid[ y ][ x ] + ' wins!')
+    };
+
     render() {
         return (
-            <>
-                <div style={{width: '100vw', height: '100vh', display: 'flex', background: '#aaa'}}>
-                    <div style={{width: '60vw', height: '40vw', margin: 'auto'}}>
-                        {
-                            this.state.grid.map( ( row, i ) => (
+            <div className="container">
+                <div className="grid">
+                    {
+                        this.state.grid.map( ( row, i ) => (
+                            <div key={i} className="row">
+                                {
+                                    row.map( ( cell, j ) => (
 
-                                <div key={i} style={{display: 'flex', flexDirection: 'row'}}>
-                                    {
-                                        row.map( ( cell, j ) => (
+                                        <div key={j} className="cell"
+                                             onClick={() => {
 
-                                            <div key={j}
-                                                 style={{
-                                                     width:      '10vw',
-                                                     height:     '10vw',
-                                                     fontSize:   '3rem',
-                                                     margin:     '3px',
-                                                     background: '#fff'
-                                                 }}
+                                                 // because of arrow function we can use the variables i and j
+                                                 // those variables came from two map methods our code is wrapped into
+                                                 console.log( 'clicked', i, j );
 
-                                                 onClick={() => {
+                                                 if(this.state.grid[ i ][ j ] !== '') return;
 
-                                                     // because of arrow function we can use the variables i and j
-                                                     // those variables came from two map methods our code is wrapped into
-                                                     console.log('clicked', i, j);
+                                                 // create a copy of state variables we can modify
+                                                 // remember we can't modify state directly!
 
-                                                     // create a copy of state variables we can modify
-                                                     // remember we can't modify state directly!
+                                                 let newGrid = this.state.grid;
+                                                 let newPlayer = this.state.player;
 
-                                                     let newGrid = this.state.grid;
-                                                     let newPlayer = this.state.player;
+                                                 if ( this.state.player === 1 ) {
+                                                     // put the symbol x on coordinates [i, j] into the grid
+                                                     newGrid[ i ][ j ] = 'x';
+                                                     // change player to player 2
+                                                     newPlayer = 2;
+                                                 } else {
+                                                     newGrid[ i ][ j ] = 'o';
+                                                     newPlayer = 1;
+                                                 }
 
-                                                     if ( this.state.player === 1 ) {
-                                                         // put the symbol x on coordinates [i, j] into the grid
-                                                         newGrid[ i ][ j ] = 'x';
-                                                         // change player to player 2
-                                                         newPlayer = 2;
-                                                     } else {
-                                                         newGrid[ i ][ j ] = 'o';
-                                                         newPlayer = 1;
-                                                     }
+                                                 // store new values to state of component
+                                                 this.setState( {
+                                                     grid:   newGrid,
+                                                     player: newPlayer
+                                                 } );
 
-                                                     // store new values to state of component
-                                                     this.setState( {
-                                                         grid: newGrid,
-                                                         player: newPlayer
-                                                     } );
-                                                 }}
-                                            >
-                                                {cell}
-                                            </div>
+                                                 this.evaluateGame();
+                                             }}
+                                        >
+                                            {cell}
+                                        </div>
 
-                                        ) )
-                                    }
-                                </div>
-                            ) )
-                        }
-                    </div>
+                                    ) )
+                                }
+                            </div>
+                        ) )
+                    }
                 </div>
-            </>
+            </div>
         )
     }
 
