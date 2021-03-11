@@ -61,7 +61,7 @@ export default function App() {
 
                                          }}
                                     >
-                                        {cell}
+                                        <span>{cell}</span>
                                     </div>
 
                                 ) )
