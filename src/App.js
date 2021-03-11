@@ -10,14 +10,6 @@ export default function App() {
 
     const [player, setPlayer] = useState( 1 );
 
-    const handleClick = (e) => {
-
-        console.log(e.target.dataset.x, e.target.dataset.y);
-
-    }
-
-
-
     return (
         <div className="container">
 
@@ -29,8 +21,6 @@ export default function App() {
                                 row.map( ( cell, j ) => (
 
                                     <div key={j} className="cell"
-                                         data-x={i}
-                                         data-y={j}
                                          onClick={() => {
                                              // because of arrow function we can use the variables i and j
                                              // those variables came from two map methods our code is wrapped into
